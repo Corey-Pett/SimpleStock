@@ -8,22 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		90AF02ED1EA1515E00513FD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF02EC1EA1515E00513FD5 /* AppDelegate.swift */; };
-		90AF02EF1EA1515E00513FD5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF02EE1EA1515E00513FD5 /* ViewController.swift */; };
 		90AF02F21EA1515E00513FD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90AF02F01EA1515E00513FD5 /* Main.storyboard */; };
 		90AF02F51EA1515E00513FD5 /* SimpleStock.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 90AF02F31EA1515E00513FD5 /* SimpleStock.xcdatamodeld */; };
 		90AF02F71EA1515E00513FD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90AF02F61EA1515E00513FD5 /* Assets.xcassets */; };
 		90AF02FA1EA1515E00513FD5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90AF02F81EA1515E00513FD5 /* LaunchScreen.storyboard */; };
+		90AF03091EA15FED00513FD5 /* AMEX.csv in Resources */ = {isa = PBXBuildFile; fileRef = 90AF03061EA15FED00513FD5 /* AMEX.csv */; };
+		90AF030A1EA15FED00513FD5 /* NYSE.csv in Resources */ = {isa = PBXBuildFile; fileRef = 90AF03071EA15FED00513FD5 /* NYSE.csv */; };
+		90AF030B1EA15FED00513FD5 /* NASDAQ.csv in Resources */ = {isa = PBXBuildFile; fileRef = 90AF03081EA15FED00513FD5 /* NASDAQ.csv */; };
+		90AF030D1EA1636B00513FD5 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF030C1EA1636B00513FD5 /* Stock.swift */; };
+		90AF031A1EA16B5300513FD5 /* StockChart+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF03181EA16B5300513FD5 /* StockChart+CoreDataClass.swift */; };
+		90AF031B1EA16B5300513FD5 /* StockChart+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF03191EA16B5300513FD5 /* StockChart+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		90AF02E91EA1515E00513FD5 /* SimpleStock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleStock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90AF02EC1EA1515E00513FD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		90AF02EE1EA1515E00513FD5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		90AF02F11EA1515E00513FD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		90AF02F41EA1515E00513FD5 /* SimpleStock.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SimpleStock.xcdatamodel; sourceTree = "<group>"; };
 		90AF02F61EA1515E00513FD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90AF02F91EA1515E00513FD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		90AF02FB1EA1515E00513FD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		90AF03061EA15FED00513FD5 /* AMEX.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AMEX.csv; sourceTree = "<group>"; };
+		90AF03071EA15FED00513FD5 /* NYSE.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NYSE.csv; sourceTree = "<group>"; };
+		90AF03081EA15FED00513FD5 /* NASDAQ.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NASDAQ.csv; sourceTree = "<group>"; };
+		90AF030C1EA1636B00513FD5 /* Stock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
+		90AF03181EA16B5300513FD5 /* StockChart+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "StockChart+CoreDataClass.swift"; path = "../StockChart+CoreDataClass.swift"; sourceTree = "<group>"; };
+		90AF03191EA16B5300513FD5 /* StockChart+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "StockChart+CoreDataProperties.swift"; path = "../StockChart+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +66,60 @@
 		90AF02EB1EA1515E00513FD5 /* SimpleStock */ = {
 			isa = PBXGroup;
 			children = (
+				90AF03021EA15BBF00513FD5 /* Supporing Files */,
+				90AF03041EA15BD600513FD5 /* ViewController */,
+				90AF03031EA15BCF00513FD5 /* Model */,
+				90AF03011EA15BB600513FD5 /* View */,
+			);
+			path = SimpleStock;
+			sourceTree = "<group>";
+		};
+		90AF03011EA15BB600513FD5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		90AF03021EA15BBF00513FD5 /* Supporing Files */ = {
+			isa = PBXGroup;
+			children = (
 				90AF02EC1EA1515E00513FD5 /* AppDelegate.swift */,
-				90AF02EE1EA1515E00513FD5 /* ViewController.swift */,
-				90AF02F01EA1515E00513FD5 /* Main.storyboard */,
 				90AF02F61EA1515E00513FD5 /* Assets.xcassets */,
 				90AF02F81EA1515E00513FD5 /* LaunchScreen.storyboard */,
 				90AF02FB1EA1515E00513FD5 /* Info.plist */,
+				90AF03061EA15FED00513FD5 /* AMEX.csv */,
+				90AF03071EA15FED00513FD5 /* NYSE.csv */,
+				90AF03081EA15FED00513FD5 /* NASDAQ.csv */,
+			);
+			name = "Supporing Files";
+			sourceTree = "<group>";
+		};
+		90AF03031EA15BCF00513FD5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				90AF03051EA15C5000513FD5 /* CoreData */,
+				90AF030C1EA1636B00513FD5 /* Stock.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		90AF03041EA15BD600513FD5 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				90AF02F01EA1515E00513FD5 /* Main.storyboard */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		90AF03051EA15C5000513FD5 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				90AF03181EA16B5300513FD5 /* StockChart+CoreDataClass.swift */,
+				90AF03191EA16B5300513FD5 /* StockChart+CoreDataProperties.swift */,
 				90AF02F31EA1515E00513FD5 /* SimpleStock.xcdatamodeld */,
 			);
-			path = SimpleStock;
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,8 +182,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90AF030B1EA15FED00513FD5 /* NASDAQ.csv in Resources */,
 				90AF02FA1EA1515E00513FD5 /* LaunchScreen.storyboard in Resources */,
+				90AF03091EA15FED00513FD5 /* AMEX.csv in Resources */,
 				90AF02F71EA1515E00513FD5 /* Assets.xcassets in Resources */,
+				90AF030A1EA15FED00513FD5 /* NYSE.csv in Resources */,
 				90AF02F21EA1515E00513FD5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,9 +198,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90AF02EF1EA1515E00513FD5 /* ViewController.swift in Sources */,
 				90AF02F51EA1515E00513FD5 /* SimpleStock.xcdatamodeld in Sources */,
 				90AF02ED1EA1515E00513FD5 /* AppDelegate.swift in Sources */,
+				90AF030D1EA1636B00513FD5 /* Stock.swift in Sources */,
+				90AF031A1EA16B5300513FD5 /* StockChart+CoreDataClass.swift in Sources */,
+				90AF031B1EA16B5300513FD5 /* StockChart+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +368,7 @@
 				90AF03001EA1515E00513FD5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
