@@ -18,10 +18,6 @@
 		90AF03231EA171BB00513FD5 /* Chart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90AF03221EA171BB00513FD5 /* Chart.storyboard */; };
 		90AF03251EA171E900513FD5 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF03241EA171E900513FD5 /* ChartViewController.swift */; };
 		90AF03271EA171FD00513FD5 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF03261EA171FD00513FD5 /* SearchTableViewController.swift */; };
-		90AF032C1EA1778A00513FD5 /* Stock+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF03281EA1778A00513FD5 /* Stock+CoreDataClass.swift */; };
-		90AF032D1EA1778A00513FD5 /* Stock+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF03291EA1778A00513FD5 /* Stock+CoreDataProperties.swift */; };
-		90AF032E1EA1778A00513FD5 /* StockChart+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF032A1EA1778A00513FD5 /* StockChart+CoreDataClass.swift */; };
-		90AF032F1EA1778A00513FD5 /* StockChart+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF032B1EA1778A00513FD5 /* StockChart+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,10 +34,6 @@
 		90AF03221EA171BB00513FD5 /* Chart.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chart.storyboard; sourceTree = "<group>"; };
 		90AF03241EA171E900513FD5 /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		90AF03261EA171FD00513FD5 /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
-		90AF03281EA1778A00513FD5 /* Stock+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Stock+CoreDataClass.swift"; path = "../Stock+CoreDataClass.swift"; sourceTree = "<group>"; };
-		90AF03291EA1778A00513FD5 /* Stock+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Stock+CoreDataProperties.swift"; path = "../Stock+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		90AF032A1EA1778A00513FD5 /* StockChart+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "StockChart+CoreDataClass.swift"; path = "../StockChart+CoreDataClass.swift"; sourceTree = "<group>"; };
-		90AF032B1EA1778A00513FD5 /* StockChart+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "StockChart+CoreDataProperties.swift"; path = "../StockChart+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,10 +106,6 @@
 		90AF03051EA15C5000513FD5 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				90AF03281EA1778A00513FD5 /* Stock+CoreDataClass.swift */,
-				90AF03291EA1778A00513FD5 /* Stock+CoreDataProperties.swift */,
-				90AF032A1EA1778A00513FD5 /* StockChart+CoreDataClass.swift */,
-				90AF032B1EA1778A00513FD5 /* StockChart+CoreDataProperties.swift */,
 				90AF02F31EA1515E00513FD5 /* SimpleStock.xcdatamodeld */,
 			);
 			name = CoreData;
@@ -227,14 +215,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90AF032C1EA1778A00513FD5 /* Stock+CoreDataClass.swift in Sources */,
 				90AF02F51EA1515E00513FD5 /* SimpleStock.xcdatamodeld in Sources */,
-				90AF032D1EA1778A00513FD5 /* Stock+CoreDataProperties.swift in Sources */,
 				90AF02ED1EA1515E00513FD5 /* AppDelegate.swift in Sources */,
 				90AF03271EA171FD00513FD5 /* SearchTableViewController.swift in Sources */,
-				90AF032E1EA1778A00513FD5 /* StockChart+CoreDataClass.swift in Sources */,
 				90AF03251EA171E900513FD5 /* ChartViewController.swift in Sources */,
-				90AF032F1EA1778A00513FD5 /* StockChart+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
