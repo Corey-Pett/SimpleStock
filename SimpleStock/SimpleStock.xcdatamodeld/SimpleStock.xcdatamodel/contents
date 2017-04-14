@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Stock" representedClassName=".Stock" syncable="YES">
+        <attribute name="industry" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ipoYear" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastSale" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="marketCap" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sector" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="summaryQuote" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="symbol" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="StockChart" representedClassName=".StockChart" syncable="YES">
         <attribute name="close" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -10,5 +20,6 @@
     </entity>
     <elements>
         <element name="StockChart" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="Stock" positionX="-54" positionY="36" width="128" height="165"/>
     </elements>
 </model>
