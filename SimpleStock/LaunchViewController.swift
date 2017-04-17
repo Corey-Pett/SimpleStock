@@ -10,7 +10,11 @@ import UIKit
 
 final class LaunchViewController: UIViewController {
 
+    // MARK: - IBOutlet
+    
     @IBOutlet weak var introLabel: UILabel!
+    
+    // MARK: - ViewController Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()

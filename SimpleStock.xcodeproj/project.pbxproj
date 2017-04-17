@@ -12,6 +12,8 @@
 		90A43A0D1EA5235100A9F033 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90A43A0C1EA5235100A9F033 /* Search.storyboard */; };
 		90A43A0F1EA5239900A9F033 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A43A0E1EA5239900A9F033 /* LaunchViewController.swift */; };
 		90A43A111EA5310F00A9F033 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A43A101EA5310F00A9F033 /* Storyboard.swift */; };
+		90A43A131EA5513C00A9F033 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A43A121EA5513C00A9F033 /* SearchTableViewCell.swift */; };
+		90A43A181EA55BF000A9F033 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90A43A171EA55BF000A9F033 /* SearchTableViewCell.xib */; };
 		90AF02ED1EA1515E00513FD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF02EC1EA1515E00513FD5 /* AppDelegate.swift */; };
 		90AF02F21EA1515E00513FD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90AF02F01EA1515E00513FD5 /* Main.storyboard */; };
 		90AF02F51EA1515E00513FD5 /* SimpleStock.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 90AF02F31EA1515E00513FD5 /* SimpleStock.xcdatamodeld */; };
@@ -22,7 +24,7 @@
 		90AF030B1EA15FED00513FD5 /* NASDAQ.csv in Resources */ = {isa = PBXBuildFile; fileRef = 90AF03081EA15FED00513FD5 /* NASDAQ.csv */; };
 		90AF03231EA171BB00513FD5 /* Chart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90AF03221EA171BB00513FD5 /* Chart.storyboard */; };
 		90AF03251EA171E900513FD5 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF03241EA171E900513FD5 /* ChartViewController.swift */; };
-		90AF03271EA171FD00513FD5 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF03261EA171FD00513FD5 /* SearchTableViewController.swift */; };
+		90AF03271EA171FD00513FD5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF03261EA171FD00513FD5 /* SearchViewController.swift */; };
 		90AF03331EA1AD5C00513FD5 /* CSVHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF03321EA1AD5C00513FD5 /* CSVHandler.swift */; };
 		90AF03411EA2BB3500513FD5 /* Stock+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF033D1EA2BB3500513FD5 /* Stock+CoreDataClass.swift */; };
 		90AF03421EA2BB3500513FD5 /* Stock+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF033E1EA2BB3500513FD5 /* Stock+CoreDataProperties.swift */; };
@@ -49,6 +51,8 @@
 		90A43A0C1EA5235100A9F033 /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		90A43A0E1EA5239900A9F033 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		90A43A101EA5310F00A9F033 /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
+		90A43A121EA5513C00A9F033 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		90A43A171EA55BF000A9F033 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		90AF02E91EA1515E00513FD5 /* SimpleStock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleStock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90AF02EC1EA1515E00513FD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90AF02F11EA1515E00513FD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -61,7 +65,7 @@
 		90AF03081EA15FED00513FD5 /* NASDAQ.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NASDAQ.csv; sourceTree = "<group>"; };
 		90AF03221EA171BB00513FD5 /* Chart.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chart.storyboard; sourceTree = "<group>"; };
 		90AF03241EA171E900513FD5 /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
-		90AF03261EA171FD00513FD5 /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
+		90AF03261EA171FD00513FD5 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		90AF03321EA1AD5C00513FD5 /* CSVHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSVHandler.swift; sourceTree = "<group>"; };
 		90AF033D1EA2BB3500513FD5 /* Stock+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stock+CoreDataClass.swift"; sourceTree = "<group>"; };
 		90AF033E1EA2BB3500513FD5 /* Stock+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stock+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -116,6 +120,15 @@
 			name = Launch;
 			sourceTree = "<group>";
 		};
+		90A43A141EA5514200A9F033 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				90A43A171EA55BF000A9F033 /* SearchTableViewCell.xib */,
+				90A43A121EA5513C00A9F033 /* SearchTableViewCell.swift */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
 		90AF02E01EA1515D00513FD5 = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +164,7 @@
 		90AF03011EA15BB600513FD5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				90A43A141EA5514200A9F033 /* Search */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -202,7 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				90A43A0C1EA5235100A9F033 /* Search.storyboard */,
-				90AF03261EA171FD00513FD5 /* SearchTableViewController.swift */,
+				90AF03261EA171FD00513FD5 /* SearchViewController.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -338,6 +352,7 @@
 			files = (
 				90AF030B1EA15FED00513FD5 /* NASDAQ.csv in Resources */,
 				90AF02FA1EA1515E00513FD5 /* LaunchScreen.storyboard in Resources */,
+				90A43A181EA55BF000A9F033 /* SearchTableViewCell.xib in Resources */,
 				90AF03091EA15FED00513FD5 /* AMEX.csv in Resources */,
 				90A43A0D1EA5235100A9F033 /* Search.storyboard in Resources */,
 				90AF02F71EA1515E00513FD5 /* Assets.xcassets in Resources */,
@@ -461,7 +476,8 @@
 				90A43A111EA5310F00A9F033 /* Storyboard.swift in Sources */,
 				90AF03431EA2BB3500513FD5 /* StockChart+CoreDataClass.swift in Sources */,
 				90AF03331EA1AD5C00513FD5 /* CSVHandler.swift in Sources */,
-				90AF03271EA171FD00513FD5 /* SearchTableViewController.swift in Sources */,
+				90AF03271EA171FD00513FD5 /* SearchViewController.swift in Sources */,
+				90A43A131EA5513C00A9F033 /* SearchTableViewCell.swift in Sources */,
 				90AF03461EA2DBC600513FD5 /* ProgressView.swift in Sources */,
 				90A43A0F1EA5239900A9F033 /* LaunchViewController.swift in Sources */,
 				90AF03251EA171E900513FD5 /* ChartViewController.swift in Sources */,
@@ -609,6 +625,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LE87SQ7BUA;
 				INFOPLIST_FILE = SimpleStock/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CP.SimpleStock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -623,6 +640,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LE87SQ7BUA;
 				INFOPLIST_FILE = SimpleStock/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CP.SimpleStock;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -95,12 +95,15 @@ struct CSVHandler {
 
 extension CSVHandler {
     
+    /// Transitions the CSV data into coreData
+    ///
+    /// - Parameter completion: success = true if all CSV info is saved correctly, else pass the error back
     public func setupApplication(completion: @escaping (_ success: Bool, _ error: CSVHandlerError?) -> Void) {
         
         let dataKey = "isDataSaved"
         
         if UserDefaults.standard.bool(forKey: dataKey) {
-            completion(true, nil)
+            completion(true, nil); return
         }
         
         do {
@@ -154,7 +157,7 @@ public enum CSVHandlerError: Error {
         case .ErrorSaving:
             message = "CoreData is at blame."
         case .ErrorParsing:
-            message = "I coulda shoulda woulda wrote my own CSV parser. This one has screwed me."
+            message = "I coulda shoulda woulda wrote my own CSV parser. This one apparently screwed me."
         }
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
