@@ -18,26 +18,21 @@ final class SearchViewController: UIViewController, UISearchControllerDelegate {
     // MARK: - Properties
     
     fileprivate lazy var searchController: UISearchController = {
-       
         var searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-        searchController.delegate = self
-        searchController.searchBar.delegate = self
         searchController.dimsBackgroundDuringPresentation = false
-
         return searchController
     }()
     
-    fileprivate var fetchedResultsController: NSFetchedResultsController<Stock>!
-    fileprivate let cacheName = "Cache"
+    fileprivate lazy var stocks = [Stock]()
+    fileprivate lazy var filteredStocks = [Stock]()
     
     // MARK: - ViewController Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-
+        self.definesPresentationContext = true
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.tableHeaderView = searchController.searchBar
@@ -56,30 +51,36 @@ final class SearchViewController: UIViewController, UISearchControllerDelegate {
         
         let fetchRequest: NSFetchRequest<Stock> = Stock.fetchRequest()
         
-        fetchRequest.predicate = nil
-        
         if let filterText = filterText {
-            
-            // Purge current cache when updating predicate
-            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: cacheName)
-            
             fetchRequest.predicate = NSPredicate(format: "name BEGINSWITH[cd] %@", filterText)
         }
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
-        fetchedResultsController =
-            NSFetchedResultsController(fetchRequest: fetchRequest,
-                                       managedObjectContext: appDelegate.persistentContainer.viewContext,
-                                       sectionNameKeyPath: nil,
-                                       cacheName: cacheName)
+        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { (asynchronousFetchResult) -> Void in
+        
+            DispatchQueue.main.async(execute: { () -> Void in
+                if let stocks = asynchronousFetchResult.finalResult {
+                    if filterText != nil {
+                        self.filteredStocks = stocks
+                    } else {
+                        self.stocks = stocks
+                    }
+                    
+                    self.tableView.reloadData()
+                }
+            })
+        }
+
         do {
-            
-            try fetchedResultsController.performFetch()
-            self.tableView.reloadData()
-            
+            try appDelegate.persistentContainer.viewContext.execute(asynchronousFetchRequest)            
         } catch let error {
-            print(error) // PRESENT ALERT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            let alert = UIAlertController(title: "Bad luck has occurred", message: "Delete the application and try again: \(error)", preferredStyle: UIAlertControllerStyle.alert)
+            let action = UIAlertAction(title: "Terminate", style: .destructive, handler: { (_) in
+                fatalError() // Note I know these do not go into release of app :)
+            })
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
         }
     }
 
@@ -92,8 +93,11 @@ extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.reuseIdentifier, for: indexPath) as! SearchTableViewCell
         
-        let stock = fetchedResultsController.object(at: indexPath)
-        cell.configure(stock: stock)
+        if searchController.isActive && searchController.searchBar.text != "" {
+            cell.configure(stock: filteredStocks[indexPath.row])
+        } else {
+            cell.configure(stock: stocks[indexPath.row])
+        }
         
         return cell
     }
@@ -103,12 +107,10 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
-        if fetchedResultsController != nil {
-            return fetchedResultsController.sections?[section].numberOfObjects ?? 0
-        } else {
-            return 0
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filteredStocks.count
         }
+        return stocks.count
     }
 }
 
@@ -125,11 +127,5 @@ extension SearchViewController: UITableViewDelegate {
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         self.reloadData(filterText: searchController.searchBar.text)
-    }
-}
-
-extension SearchViewController: UISearchBarDelegate {
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.reloadData(filterText: nil)
     }
 }

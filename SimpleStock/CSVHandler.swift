@@ -162,7 +162,7 @@ public enum CSVHandlerError: Error {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Fail me", style: .destructive) { (action) in
-            fatalError()
+            fatalError() // I know these should not be here in release
         }
         
         alert.addAction(alertAction)
