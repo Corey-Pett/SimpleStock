@@ -13,12 +13,12 @@ import CoreData
 /// A handler to manage CSV files transition to CoreData
 struct CSVHandler {
     
-    /// Parses a CSV file
-    /// and saves each entry as a Stock entity into CoreData on a background thread
+    /// Parses a CSV file and saves each entry as a Stock entity into CoreData on a background thread
     ///
-    /// - Parameter fileName: String name of file inside Bundle.main.path
-    /// - Throws: throws a CSVHandlerError
-    public func saveStockCSV(fileName: String) throws {
+    /// - Parameters:
+    ///   - fileName: String name of file inside Bundle.main.path
+    ///   - completion: success = true if CSV info is saved correclty, else return CSVHandlerError
+    public func saveStockCSV(fileName: String, completion: @escaping (_ success: Bool, _ error: CSVHandlerError?) -> Void) {
         
         do {
             
@@ -30,7 +30,6 @@ struct CSVHandler {
                 throw CSVHandlerError.ErrorParsing
             }
             
-            var coreDataError: Error?
             appDelegate.persistentContainer.performBackgroundTask({ (managedContext) in
                 while let _ = csv.next() {
                     
@@ -49,19 +48,19 @@ struct CSVHandler {
                         try managedContext.save()
                     } catch let error as NSError {
                         print("Could not save. \(error), \(error.userInfo)")
-                        coreDataError = error
+                        completion(false, CSVHandlerError.ErrorSaving)
                     }
                 }
+                
+                completion(true, nil)
             })
-            
-        if coreDataError != nil { throw CSVHandlerError.ErrorSaving }
             
         } catch CSVHandlerError.PathNotFound {
             print("File not found")
-            throw CSVHandlerError.PathNotFound
+            completion(false, CSVHandlerError.PathNotFound)
         } catch {
             print("Error Parsing CSV")
-            throw CSVHandlerError.ErrorParsing
+            completion(false, CSVHandlerError.ErrorParsing)
         }
     }
     
@@ -95,7 +94,9 @@ struct CSVHandler {
 
 extension CSVHandler {
     
-    /// Transitions the CSV data into coreData
+    /// Transitions the CSV data into coreData. 
+    /// If user exits while this is saving, multiple entries will show.
+    /// Could make this atomic, but I am too lazy
     ///
     /// - Parameter completion: success = true if all CSV info is saved correctly, else pass the error back
     public func setupApplication(completion: @escaping (_ success: Bool, _ error: CSVHandlerError?) -> Void) {
@@ -106,26 +107,26 @@ extension CSVHandler {
             completion(true, nil); return
         }
         
-        do {
+        let files = ["AMEX", "NASDAQ", "NYSE"]
+        
+        let dispatchGroup = DispatchGroup()
+        
+        for file in files {
             
-            let files = ["AMEX", "NASDAQ", "NYSE"]
+            dispatchGroup.enter()
             
-            for file in files {
-                try self.saveStockCSV(fileName: file)
-            }
-            
+            self.saveStockCSV(fileName: file, completion: { (success, error) in
+                if error != nil {
+                    completion(false, error); return
+                }
+                
+                dispatchGroup.leave()
+            })
+        }
+        
+        dispatchGroup.notify(queue: .main) {
             UserDefaults.standard.set(true, forKey: dataKey)
-            
             completion(true, nil)
-            
-        } catch CSVHandlerError.ErrorSaving {
-            completion(false, CSVHandlerError.ErrorSaving)
-        } catch CSVHandlerError.ErrorParsing {
-            completion(false, CSVHandlerError.ErrorParsing)
-        } catch CSVHandlerError.PathNotFound {
-            completion(false, CSVHandlerError.PathNotFound)
-        } catch {
-            completion(false, CSVHandlerError.ErrorSaving)
         }
     }
 }
@@ -162,7 +163,7 @@ public enum CSVHandlerError: Error {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Fail me", style: .destructive) { (action) in
-            fatalError() // I know these should not be here in release
+            fatalError() // I know these should not be here in release.
         }
         
         alert.addAction(alertAction)

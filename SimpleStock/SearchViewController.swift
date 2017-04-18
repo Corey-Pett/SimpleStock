@@ -50,7 +50,7 @@ final class SearchViewController: UIViewController, UISearchControllerDelegate {
         }
         
         let fetchRequest: NSFetchRequest<Stock> = Stock.fetchRequest()
-        
+
         if let filterText = filterText {
             fetchRequest.predicate = NSPredicate(format: "name BEGINSWITH[cd] %@", filterText)
         }
@@ -75,15 +75,9 @@ final class SearchViewController: UIViewController, UISearchControllerDelegate {
         do {
             try appDelegate.persistentContainer.viewContext.execute(asynchronousFetchRequest)            
         } catch let error {
-            let alert = UIAlertController(title: "Bad luck has occurred", message: "Delete the application and try again: \(error)", preferredStyle: UIAlertControllerStyle.alert)
-            let action = UIAlertAction(title: "Terminate", style: .destructive, handler: { (_) in
-                fatalError() // Note I know these do not go into release of app :)
-            })
-            alert.addAction(action)
-            self.present(alert, animated: true, completion: nil)
+            NotificationManager().presentSimpleAlertOn(vc: self, title: "Oh snap", message: "You are going to have to redownload the app: \(error)")
         }
     }
-
 }
 
 // MARK: - UITableView Data Source
@@ -118,6 +112,13 @@ extension SearchViewController: UITableViewDataSource {
 
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        self.tableView.deselectRow(at: indexPath, animated: true)
+
+        let chartViewController = Storyboard.chart.storyboard.instantiateViewController(
+            withIdentifier: Storyboard.chart.rawValue) as? ChartViewController
+        
+        
         
     }
 }

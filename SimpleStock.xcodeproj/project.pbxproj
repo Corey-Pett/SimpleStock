@@ -14,6 +14,7 @@
 		90A43A111EA5310F00A9F033 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A43A101EA5310F00A9F033 /* Storyboard.swift */; };
 		90A43A131EA5513C00A9F033 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A43A121EA5513C00A9F033 /* SearchTableViewCell.swift */; };
 		90A43A181EA55BF000A9F033 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90A43A171EA55BF000A9F033 /* SearchTableViewCell.xib */; };
+		90A43A1A1EA66ADD00A9F033 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A43A191EA66ADD00A9F033 /* NotificationManager.swift */; };
 		90AF02ED1EA1515E00513FD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF02EC1EA1515E00513FD5 /* AppDelegate.swift */; };
 		90AF02F21EA1515E00513FD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90AF02F01EA1515E00513FD5 /* Main.storyboard */; };
 		90AF02F51EA1515E00513FD5 /* SimpleStock.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 90AF02F31EA1515E00513FD5 /* SimpleStock.xcdatamodeld */; };
@@ -53,6 +54,7 @@
 		90A43A101EA5310F00A9F033 /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		90A43A121EA5513C00A9F033 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		90A43A171EA55BF000A9F033 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
+		90A43A191EA66ADD00A9F033 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		90AF02E91EA1515E00513FD5 /* SimpleStock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleStock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90AF02EC1EA1515E00513FD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90AF02F11EA1515E00513FD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 		90AF02EB1EA1515E00513FD5 /* SimpleStock */ = {
 			isa = PBXGroup;
 			children = (
+				90A43A191EA66ADD00A9F033 /* NotificationManager.swift */,
 				90AF03021EA15BBF00513FD5 /* Supporing Files */,
 				90AF03341EA2B9AC00513FD5 /* CSV */,
 				90AF031C1EA16E5900513FD5 /* ViewController */,
@@ -473,6 +476,7 @@
 				90AF02F51EA1515E00513FD5 /* SimpleStock.xcdatamodeld in Sources */,
 				90AF02ED1EA1515E00513FD5 /* AppDelegate.swift in Sources */,
 				90AF03411EA2BB3500513FD5 /* Stock+CoreDataClass.swift in Sources */,
+				90A43A1A1EA66ADD00A9F033 /* NotificationManager.swift in Sources */,
 				90A43A111EA5310F00A9F033 /* Storyboard.swift in Sources */,
 				90AF03431EA2BB3500513FD5 /* StockChart+CoreDataClass.swift in Sources */,
 				90AF03331EA1AD5C00513FD5 /* CSVHandler.swift in Sources */,
