@@ -23,7 +23,7 @@ fileprivate enum ChartKey: String {
     case volume, open, close, low, high
 }
 
-class StockData {
+final class StockData {
     
     /// Fetches chart information for a stock from the Yahoo API
     ///
@@ -63,9 +63,7 @@ class StockData {
                         completion(false, nil, StockDataError.FetchError); return
                     }
                     
-                    DispatchQueue.main.async {
-                        completion(true, series, nil)
-                    }
+                    completion(true, series, nil)
                     
                     break
                     
@@ -112,7 +110,7 @@ extension StockData {
                 let date = NSDate(timeIntervalSince1970: (point["Timestamp"] as? Double ?? point["Date"] as! Double))
                 
                 let stockPoint = StockPoint(entity: StockPoint.entity(), insertInto: managedContext)
-            
+                
                 guard
                     let close = point[ChartKey.close.rawValue] as? Float,
                     let open = point[ChartKey.open.rawValue] as? Float,
@@ -120,7 +118,7 @@ extension StockData {
                     let high = point[ChartKey.high.rawValue] as? Float,
                     let volume = point[ChartKey.volume.rawValue] as? Float
                 else {
-                    completion(false, StockDataError.SaveError); return
+                    return
                 }
                 
                 stockPoint.date = date
@@ -139,9 +137,7 @@ extension StockData {
                 }
             }
         
-            DispatchQueue.main.async {
-                completion(true, nil)
-            }
+            completion(true, nil)
         })
     }
     
@@ -161,6 +157,7 @@ extension StockData {
         
         self.fetchStockChartFor(symbol: symbol, timeRange: .OneMonth) { (success, data, error) in
             if success {
+                
                 guard let data = data else {
                     completion(false, StockDataError.SaveError); return
                 }
@@ -169,6 +166,7 @@ extension StockData {
                     if success { completion(true, nil) }
                     else { completion(false, StockDataError.SaveError) }
                 })
+                
             } else {
                 completion(false, error)
             }

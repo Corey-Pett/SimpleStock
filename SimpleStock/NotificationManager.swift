@@ -17,7 +17,7 @@ final class NotificationManager {
     ///   - view: the displayed view
     ///   - title: title of the alert
     ///   - message: message of the alert
-    final public func presentSimpleAlertOn(vc: UIViewController, title: String, message: String) {
+    public func presentSimpleAlertOn(vc: UIViewController, title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         let action = UIAlertAction(title: "Terminate", style: .destructive, handler: { (_) in
             fatalError() // Should not be in app release

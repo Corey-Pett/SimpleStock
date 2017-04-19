@@ -21,7 +21,7 @@ enum NetworkReachabilityStatus {
     case reachable
 }
 
-class NetworkReachability {
+final class NetworkReachability {
     private var previousNetworkReachabilityStatus: NetworkReachabilityStatus = .unknown
     var delegate: NetworkReachabilityDelegate?
     

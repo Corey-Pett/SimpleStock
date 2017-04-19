@@ -18,7 +18,7 @@ final class CSVHandler {
     /// - Parameters:
     ///   - fileName: String name of file inside Bundle.main.path
     ///   - completion: success = true if CSV info is saved correclty, else return CSVHandlerError
-    final public func saveStockCSV(fileName: String,
+    public func saveStockCSV(fileName: String,
                                    completion: @escaping (_ success: Bool, _ error: CSVHandlerError?) -> Void) {
         
         do {
@@ -53,9 +53,7 @@ final class CSVHandler {
                     }
                 }
                 
-                DispatchQueue.main.async {
-                    completion(true, nil)
-                }
+                completion(true, nil)
             })
             
         } catch CSVHandlerError.PathNotFound {
@@ -72,7 +70,7 @@ final class CSVHandler {
     /// - Parameter fileName: String name of a file inside Bundle.main.path
     /// - Returns: a CSV object - must import CSV to use
     /// - Throws: throws a CSVHandlerError
-    final public func getCSVFor(fileName: String) throws -> CSV {
+    public func getCSVFor(fileName: String) throws -> CSV {
         
         let fileType = ".csv"
         
@@ -102,7 +100,7 @@ extension CSVHandler {
     /// Could make this atomic, but I am too lazy
     ///
     /// - Parameter completion: success = true if all CSV info is saved correctly, else pass the error back
-    final public func setupApplication(completion: @escaping (_ success: Bool, _ error: CSVHandlerError?) -> Void) {
+    public func setupApplication(completion: @escaping (_ success: Bool, _ error: CSVHandlerError?) -> Void) {
         
         let dataKey = "isDataSaved"
         

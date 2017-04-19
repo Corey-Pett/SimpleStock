@@ -17,7 +17,7 @@ final class SearchTableViewCell: UITableViewCell {
     @IBOutlet weak var companyNameLabel: UILabel!
     @IBOutlet weak var symbolLabel: UILabel!
     
-    final public func configure(stock: Stock) {
+    public func configure(stock: Stock) {
         companyNameLabel.text = stock.name
         symbolLabel.text = stock.symbol
     }

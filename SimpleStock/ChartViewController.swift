@@ -62,7 +62,7 @@ final class ChartViewController: UIViewController {
     
     // MARK: - Private functions
     
-    final fileprivate func updateStockPoints() {
+    fileprivate func updateStockPoints() {
         
         let progressView = ProgressView(view: self.view, message: nil)
         
@@ -79,14 +79,16 @@ final class ChartViewController: UIViewController {
                 if let error = error { self.handleError(error: error) }
             } else {
                 self.stockPoints = stock.points?.allObjects as? [StockPoint]
-                self.reloadCharts()
+                
+                DispatchQueue.main.async {
+                    self.reloadCharts()
+                    progressView.hideView()
+                }
             }
-            
-            progressView.hideView()
         }
     }
     
-    final fileprivate func reloadCharts() {
+    fileprivate func reloadCharts() {
         
         var lineDataEntries = [ChartDataEntry]()
         var candleDataEntries = [CandleChartDataEntry]()
@@ -133,7 +135,7 @@ final class ChartViewController: UIViewController {
         
     }
     
-    final fileprivate func handleError(error: StockDataError) {
+    fileprivate func handleError(error: StockDataError) {
         
         let title = "An error has occurred"
         var message = String()
