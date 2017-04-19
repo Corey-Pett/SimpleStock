@@ -107,9 +107,10 @@ class SimpleStockTests: XCTestCase {
         }
         
         let expect = expectation(description: "Fetch Stock Chart")
-
-        StockData().fetchStockChartFor(symbol: symbol, timeRange: timeRange) { (data, error) in
-            
+        
+        
+        StockData().fetchStockChartFor(symbol: symbol, timeRange: timeRange) { (success, data, error) in
+           
             if data?.count == dataCount {
                 XCTAssert(true)
             } else {
@@ -117,7 +118,6 @@ class SimpleStockTests: XCTestCase {
             }
             
             expect.fulfill()
-
         }
         
         waitForExpectations(timeout: 10) { (error) in
@@ -128,69 +128,4 @@ class SimpleStockTests: XCTestCase {
         }
         
     }
-    
-//    func testCoreDataOwnership() {
-//        
-//        let symbol = "AMD"
-//        let timeRange = ChartTimeRange.OneMonth
-//        
-//        var dataCount = Int()
-//        switch (timeRange) {
-//            
-//        case .OneDay:
-//            dataCount = 1
-//        case .FiveDays:
-//            dataCount = 5
-//        case .TenDays:
-//            dataCount = 10
-//        case .OneMonth:
-//            dataCount = 30
-//        }
-//        
-//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-//            XCTAssert(false); return
-//        }
-//        
-//        let expect = expectation(description: "Core Data Ownership")
-//        
-//        let fetchRequest: NSFetchRequest<Stock> = Stock.fetchRequest()
-//        fetchRequest.predicate = NSPredicate(format: "symbol == %@", symbol)
-//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "symbol", ascending: true)]
-//        
-//        StockData().fetchStockChartFor(symbol: symbol, timeRange: timeRange) { (data, error) in
-//            
-//            do {
-//                let results = try appDelegate.persistentContainer.viewContext.fetch(fetchRequest)
-//                let stock = results.first!
-//                
-//                StockData().saveStockChartTo(stock: stock, data: data!, completion: { (success, error) in
-//                    if success {
-//                        
-//                        print(stock.points)
-//                        
-//                        if stock.points?.count == dataCount {
-//                            XCTAssert(true)
-//                        } else {
-//                            XCTAssert(false)
-//                        }
-//                        
-//                        expect.fulfill()
-//                    }
-//                })
-//                
-//            } catch {
-//                XCTAssert(false)
-//            }
-//            
-//        }
-//        
-//        waitForExpectations(timeout: 60) { (error) in
-//            if let error = error {
-//                print("Error: \(error.localizedDescription)")
-//                XCTAssert(false)
-//            }
-//        }
-//        
-//    }
-    
 }
