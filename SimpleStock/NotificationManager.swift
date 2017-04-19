@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct NotificationManager {
+final class NotificationManager {
     
     /// Everything should work. None of these alerts should ever show.
     ///
@@ -17,7 +17,7 @@ struct NotificationManager {
     ///   - view: the displayed view
     ///   - title: title of the alert
     ///   - message: message of the alert
-    public func presentSimpleAlertOn(vc: UIViewController, title: String, message: String) {
+    final public func presentSimpleAlertOn(vc: UIViewController, title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         let action = UIAlertAction(title: "Terminate", style: .destructive, handler: { (_) in
             fatalError() // Should not be in app release

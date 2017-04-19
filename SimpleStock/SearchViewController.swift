@@ -38,6 +38,7 @@ final class SearchViewController: UIViewController, UISearchControllerDelegate {
         self.tableView.tableHeaderView = searchController.searchBar
         tableView.register(UINib(nibName: "SearchTableViewCell", bundle: nil), forCellReuseIdentifier: SearchTableViewCell.reuseIdentifier)
 
+        
         reloadData(filterText: nil)
     }
     
@@ -115,10 +116,18 @@ extension SearchViewController: UITableViewDelegate {
         
         self.tableView.deselectRow(at: indexPath, animated: true)
 
-        let chartViewController = Storyboard.chart.storyboard.instantiateViewController(
-            withIdentifier: Storyboard.chart.rawValue) as? ChartViewController
+        guard let chartViewController = Storyboard.chart.storyboard.instantiateViewController(
+            withIdentifier: "rootChart") as? ChartViewController else {
+                return
+        }
         
+        if searchController.isActive && searchController.searchBar.text != "" {
+            chartViewController.stock = filteredStocks[indexPath.row]
+        } else {
+            chartViewController.stock = stocks[indexPath.row]
+        }
         
+        navigationController?.pushViewController(chartViewController, animated: true)
         
     }
 }

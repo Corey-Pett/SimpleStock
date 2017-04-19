@@ -9,12 +9,18 @@
 /* Begin PBXBuildFile section */
 		421A75FA52D8A3E1942B6C93 /* Pods_SimpleStock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35A25629CE07FECB07236F2B /* Pods_SimpleStock.framework */; };
 		4245E7A93F72B0C6F3C85071 /* Pods_SimpleStock_SimpleStockTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50A5A07724DE2AF904A796AE /* Pods_SimpleStock_SimpleStockTests.framework */; };
+		905A8AED1EA7F17E00762573 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905A8AEC1EA7F17E00762573 /* Reachability.swift */; };
 		90A43A0D1EA5235100A9F033 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90A43A0C1EA5235100A9F033 /* Search.storyboard */; };
 		90A43A0F1EA5239900A9F033 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A43A0E1EA5239900A9F033 /* LaunchViewController.swift */; };
 		90A43A111EA5310F00A9F033 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A43A101EA5310F00A9F033 /* Storyboard.swift */; };
 		90A43A131EA5513C00A9F033 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A43A121EA5513C00A9F033 /* SearchTableViewCell.swift */; };
 		90A43A181EA55BF000A9F033 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90A43A171EA55BF000A9F033 /* SearchTableViewCell.xib */; };
 		90A43A1A1EA66ADD00A9F033 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A43A191EA66ADD00A9F033 /* NotificationManager.swift */; };
+		90A43A1C1EA687F900A9F033 /* StockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A43A1B1EA687F900A9F033 /* StockData.swift */; };
+		90A43A2F1EA6C13D00A9F033 /* StockPoint+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A43A2B1EA6C13D00A9F033 /* StockPoint+CoreDataClass.swift */; };
+		90A43A301EA6C13D00A9F033 /* StockPoint+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A43A2C1EA6C13D00A9F033 /* StockPoint+CoreDataProperties.swift */; };
+		90A43A311EA6C13D00A9F033 /* Stock+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A43A2D1EA6C13D00A9F033 /* Stock+CoreDataClass.swift */; };
+		90A43A321EA6C13D00A9F033 /* Stock+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A43A2E1EA6C13D00A9F033 /* Stock+CoreDataProperties.swift */; };
 		90AF02ED1EA1515E00513FD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF02EC1EA1515E00513FD5 /* AppDelegate.swift */; };
 		90AF02F21EA1515E00513FD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90AF02F01EA1515E00513FD5 /* Main.storyboard */; };
 		90AF02F51EA1515E00513FD5 /* SimpleStock.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 90AF02F31EA1515E00513FD5 /* SimpleStock.xcdatamodeld */; };
@@ -27,10 +33,6 @@
 		90AF03251EA171E900513FD5 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF03241EA171E900513FD5 /* ChartViewController.swift */; };
 		90AF03271EA171FD00513FD5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF03261EA171FD00513FD5 /* SearchViewController.swift */; };
 		90AF03331EA1AD5C00513FD5 /* CSVHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF03321EA1AD5C00513FD5 /* CSVHandler.swift */; };
-		90AF03411EA2BB3500513FD5 /* Stock+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF033D1EA2BB3500513FD5 /* Stock+CoreDataClass.swift */; };
-		90AF03421EA2BB3500513FD5 /* Stock+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF033E1EA2BB3500513FD5 /* Stock+CoreDataProperties.swift */; };
-		90AF03431EA2BB3500513FD5 /* StockChart+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF033F1EA2BB3500513FD5 /* StockChart+CoreDataClass.swift */; };
-		90AF03441EA2BB3500513FD5 /* StockChart+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF03401EA2BB3500513FD5 /* StockChart+CoreDataProperties.swift */; };
 		90AF03461EA2DBC600513FD5 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF03451EA2DBC600513FD5 /* ProgressView.swift */; };
 		90AF034E1EA2F44600513FD5 /* SimpleStockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AF034D1EA2F44600513FD5 /* SimpleStockTests.swift */; };
 /* End PBXBuildFile section */
@@ -49,12 +51,18 @@
 		35A25629CE07FECB07236F2B /* Pods_SimpleStock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleStock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50A5A07724DE2AF904A796AE /* Pods_SimpleStock_SimpleStockTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleStock_SimpleStockTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		51F344B48E8389C6A20C6C90 /* Pods-SimpleStock-SimpleStockTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleStock-SimpleStockTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimpleStock-SimpleStockTests/Pods-SimpleStock-SimpleStockTests.debug.xcconfig"; sourceTree = "<group>"; };
+		905A8AEC1EA7F17E00762573 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		90A43A0C1EA5235100A9F033 /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		90A43A0E1EA5239900A9F033 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		90A43A101EA5310F00A9F033 /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		90A43A121EA5513C00A9F033 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		90A43A171EA55BF000A9F033 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		90A43A191EA66ADD00A9F033 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		90A43A1B1EA687F900A9F033 /* StockData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockData.swift; sourceTree = "<group>"; };
+		90A43A2B1EA6C13D00A9F033 /* StockPoint+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StockPoint+CoreDataClass.swift"; sourceTree = "<group>"; };
+		90A43A2C1EA6C13D00A9F033 /* StockPoint+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StockPoint+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		90A43A2D1EA6C13D00A9F033 /* Stock+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stock+CoreDataClass.swift"; sourceTree = "<group>"; };
+		90A43A2E1EA6C13D00A9F033 /* Stock+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stock+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		90AF02E91EA1515E00513FD5 /* SimpleStock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleStock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90AF02EC1EA1515E00513FD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90AF02F11EA1515E00513FD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -69,10 +77,6 @@
 		90AF03241EA171E900513FD5 /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		90AF03261EA171FD00513FD5 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		90AF03321EA1AD5C00513FD5 /* CSVHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSVHandler.swift; sourceTree = "<group>"; };
-		90AF033D1EA2BB3500513FD5 /* Stock+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stock+CoreDataClass.swift"; sourceTree = "<group>"; };
-		90AF033E1EA2BB3500513FD5 /* Stock+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stock+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		90AF033F1EA2BB3500513FD5 /* StockChart+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StockChart+CoreDataClass.swift"; sourceTree = "<group>"; };
-		90AF03401EA2BB3500513FD5 /* StockChart+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StockChart+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		90AF03451EA2DBC600513FD5 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		90AF034B1EA2F44600513FD5 /* SimpleStockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleStockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		90AF034D1EA2F44600513FD5 /* SimpleStockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleStockTests.swift; sourceTree = "<group>"; };
@@ -154,7 +158,6 @@
 		90AF02EB1EA1515E00513FD5 /* SimpleStock */ = {
 			isa = PBXGroup;
 			children = (
-				90A43A191EA66ADD00A9F033 /* NotificationManager.swift */,
 				90AF03021EA15BBF00513FD5 /* Supporing Files */,
 				90AF03341EA2B9AC00513FD5 /* CSV */,
 				90AF031C1EA16E5900513FD5 /* ViewController */,
@@ -180,6 +183,9 @@
 				90AF02F81EA1515E00513FD5 /* LaunchScreen.storyboard */,
 				90AF02FB1EA1515E00513FD5 /* Info.plist */,
 				90AF03451EA2DBC600513FD5 /* ProgressView.swift */,
+				90A43A191EA66ADD00A9F033 /* NotificationManager.swift */,
+				90A43A1B1EA687F900A9F033 /* StockData.swift */,
+				905A8AEC1EA7F17E00762573 /* Reachability.swift */,
 			);
 			name = "Supporing Files";
 			sourceTree = "<group>";
@@ -195,10 +201,10 @@
 		90AF03051EA15C5000513FD5 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				90AF033D1EA2BB3500513FD5 /* Stock+CoreDataClass.swift */,
-				90AF033E1EA2BB3500513FD5 /* Stock+CoreDataProperties.swift */,
-				90AF033F1EA2BB3500513FD5 /* StockChart+CoreDataClass.swift */,
-				90AF03401EA2BB3500513FD5 /* StockChart+CoreDataProperties.swift */,
+				90A43A2B1EA6C13D00A9F033 /* StockPoint+CoreDataClass.swift */,
+				90A43A2C1EA6C13D00A9F033 /* StockPoint+CoreDataProperties.swift */,
+				90A43A2D1EA6C13D00A9F033 /* Stock+CoreDataClass.swift */,
+				90A43A2E1EA6C13D00A9F033 /* Stock+CoreDataProperties.swift */,
 				90AF02F31EA1515E00513FD5 /* SimpleStock.xcdatamodeld */,
 			);
 			name = CoreData;
@@ -472,20 +478,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90AF03441EA2BB3500513FD5 /* StockChart+CoreDataProperties.swift in Sources */,
 				90AF02F51EA1515E00513FD5 /* SimpleStock.xcdatamodeld in Sources */,
 				90AF02ED1EA1515E00513FD5 /* AppDelegate.swift in Sources */,
-				90AF03411EA2BB3500513FD5 /* Stock+CoreDataClass.swift in Sources */,
 				90A43A1A1EA66ADD00A9F033 /* NotificationManager.swift in Sources */,
 				90A43A111EA5310F00A9F033 /* Storyboard.swift in Sources */,
-				90AF03431EA2BB3500513FD5 /* StockChart+CoreDataClass.swift in Sources */,
+				90A43A1C1EA687F900A9F033 /* StockData.swift in Sources */,
+				90A43A311EA6C13D00A9F033 /* Stock+CoreDataClass.swift in Sources */,
 				90AF03331EA1AD5C00513FD5 /* CSVHandler.swift in Sources */,
 				90AF03271EA171FD00513FD5 /* SearchViewController.swift in Sources */,
+				90A43A321EA6C13D00A9F033 /* Stock+CoreDataProperties.swift in Sources */,
 				90A43A131EA5513C00A9F033 /* SearchTableViewCell.swift in Sources */,
 				90AF03461EA2DBC600513FD5 /* ProgressView.swift in Sources */,
 				90A43A0F1EA5239900A9F033 /* LaunchViewController.swift in Sources */,
+				90A43A2F1EA6C13D00A9F033 /* StockPoint+CoreDataClass.swift in Sources */,
+				90A43A301EA6C13D00A9F033 /* StockPoint+CoreDataProperties.swift in Sources */,
+				905A8AED1EA7F17E00762573 /* Reachability.swift in Sources */,
 				90AF03251EA171E900513FD5 /* ChartViewController.swift in Sources */,
-				90AF03421EA2BB3500513FD5 /* Stock+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

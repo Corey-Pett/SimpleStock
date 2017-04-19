@@ -11,14 +11,15 @@ import CSV
 import CoreData
 
 /// A handler to manage CSV files transition to CoreData
-struct CSVHandler {
+final class CSVHandler {
     
     /// Parses a CSV file and saves each entry as a Stock entity into CoreData on a background thread
     ///
     /// - Parameters:
     ///   - fileName: String name of file inside Bundle.main.path
     ///   - completion: success = true if CSV info is saved correclty, else return CSVHandlerError
-    public func saveStockCSV(fileName: String, completion: @escaping (_ success: Bool, _ error: CSVHandlerError?) -> Void) {
+    final public func saveStockCSV(fileName: String,
+                                   completion: @escaping (_ success: Bool, _ error: CSVHandlerError?) -> Void) {
         
         do {
             
@@ -52,7 +53,9 @@ struct CSVHandler {
                     }
                 }
                 
-                completion(true, nil)
+                DispatchQueue.main.async {
+                    completion(true, nil)
+                }
             })
             
         } catch CSVHandlerError.PathNotFound {
@@ -69,7 +72,7 @@ struct CSVHandler {
     /// - Parameter fileName: String name of a file inside Bundle.main.path
     /// - Returns: a CSV object - must import CSV to use
     /// - Throws: throws a CSVHandlerError
-    public func getCSVFor(fileName: String) throws -> CSV {
+    final public func getCSVFor(fileName: String) throws -> CSV {
         
         let fileType = ".csv"
         
@@ -99,7 +102,7 @@ extension CSVHandler {
     /// Could make this atomic, but I am too lazy
     ///
     /// - Parameter completion: success = true if all CSV info is saved correctly, else pass the error back
-    public func setupApplication(completion: @escaping (_ success: Bool, _ error: CSVHandlerError?) -> Void) {
+    final public func setupApplication(completion: @escaping (_ success: Bool, _ error: CSVHandlerError?) -> Void) {
         
         let dataKey = "isDataSaved"
         
@@ -143,9 +146,7 @@ public enum Header: String {
 }
 
 public enum CSVHandlerError: Error {
-    case PathNotFound
-    case ErrorSaving
-    case ErrorParsing
+    case PathNotFound, ErrorSaving, ErrorParsing
     
     var alert: UIAlertController! {
         

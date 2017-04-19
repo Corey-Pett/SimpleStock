@@ -9,17 +9,19 @@
         <attribute name="sector" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="summaryQuote" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="symbol" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="points" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StockPoint" inverseName="owner" inverseEntity="StockPoint" syncable="YES"/>
     </entity>
-    <entity name="StockChart" representedClassName=".StockChart" syncable="YES">
+    <entity name="StockPoint" representedClassName=".StockPoint" syncable="YES">
         <attribute name="close" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="high" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="low" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="open" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="volume" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Stock" inverseName="points" inverseEntity="Stock" syncable="YES"/>
     </entity>
     <elements>
-        <element name="StockChart" positionX="-63" positionY="-18" width="128" height="135"/>
-        <element name="Stock" positionX="-54" positionY="36" width="128" height="165"/>
+        <element name="Stock" positionX="-54" positionY="36" width="128" height="180"/>
+        <element name="StockPoint" positionX="-63" positionY="-18" width="128" height="150"/>
     </elements>
 </model>

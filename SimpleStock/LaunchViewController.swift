@@ -20,7 +20,7 @@ final class LaunchViewController: UIViewController {
         super.viewDidLoad()
 
         // Display loading screen
-        let progressView = ProgressView(view: self.view, message: "Migrating CSV files to CoreData. Please wait...")
+        let progressView = ProgressView(view: self.view, message: "Migrating .csv files to CoreData. Please wait...")
         progressView.showView()
         
         // Setup the transition to CoreData

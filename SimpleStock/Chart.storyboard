@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dMT-2T-i4g">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Graphs-->
         <scene sceneID="byV-S6-EXf">
             <objects>
-                <viewController storyboardIdentifier="rootChart" id="HiR-yj-hEV" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="rootChart" id="HiR-yj-hEV" customClass="ChartViewController" customModule="SimpleStock" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Iq7-xT-J1d"/>
                         <viewControllerLayoutGuide type="bottom" id="pbV-pX-pMh"/>
@@ -20,13 +21,55 @@
                     <view key="view" contentMode="scaleToFill" id="Hzz-34-OS9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pvm-Lq-M2C" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="64" width="375" height="281"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFf-BF-Ymt" customClass="CandleStickChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="345" width="375" height="322"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OFf-BF-Ymt" firstAttribute="leading" secondItem="Hzz-34-OS9" secondAttribute="leadingMargin" constant="-16" id="EiN-EW-Zer"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pvm-Lq-M2C" secondAttribute="trailing" constant="-16" id="FQ8-9k-A13"/>
+                            <constraint firstItem="OFf-BF-Ymt" firstAttribute="top" secondItem="Hzz-34-OS9" secondAttribute="top" constant="345" id="YNf-eP-Jsu"/>
+                            <constraint firstItem="pvm-Lq-M2C" firstAttribute="leading" secondItem="Hzz-34-OS9" secondAttribute="leadingMargin" constant="-16" id="fiA-6U-yMX"/>
+                            <constraint firstItem="OFf-BF-Ymt" firstAttribute="top" secondItem="pvm-Lq-M2C" secondAttribute="bottom" id="hXG-z5-UtY"/>
+                            <constraint firstItem="pvm-Lq-M2C" firstAttribute="top" secondItem="Iq7-xT-J1d" secondAttribute="bottom" id="odB-a6-eML"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OFf-BF-Ymt" secondAttribute="trailing" constant="-16" id="q9e-cF-YH2"/>
+                            <constraint firstItem="pbV-pX-pMh" firstAttribute="top" secondItem="OFf-BF-Ymt" secondAttribute="bottom" id="u4f-9P-hOB"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ALa-jl-rqN"/>
+                    <navigationItem key="navigationItem" title="Graphs" id="ALa-jl-rqN"/>
+                    <connections>
+                        <outlet property="candleStickChartView" destination="OFf-BF-Ymt" id="jBs-3c-n3K"/>
+                        <outlet property="lineChartView" destination="pvm-Lq-M2C" id="Sto-o9-eVZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XE4-LE-10f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2004" y="139.880059970015"/>
+            <point key="canvasLocation" x="2936.8000000000002" y="127.28635682158921"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="b9x-U3-Klx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dMT-2T-i4g" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vtP-gx-gTa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="HiR-yj-hEV" kind="relationship" relationship="rootViewController" id="Fdt-qD-wap"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x3y-ad-RC5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1997.5999999999999" y="127.28635682158921"/>
         </scene>
     </scenes>
 </document>
