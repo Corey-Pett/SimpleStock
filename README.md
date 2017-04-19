@@ -19,3 +19,8 @@ CocoaPods:
 - CSV.swift
 - Charts
 - AFNetworking
+
+# Known Bugs
+
+- Some Yahoo requests have an issue when being parsed into JSON
+- Some requests fail the alamoFire request
