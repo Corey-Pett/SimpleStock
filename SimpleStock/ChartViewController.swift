@@ -82,8 +82,11 @@ final class ChartViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     self.reloadCharts()
-                    progressView.hideView()
                 }
+            }
+            
+            DispatchQueue.main.async {
+                progressView.hideView()
             }
         }
     }
@@ -146,6 +149,8 @@ final class ChartViewController: UIViewController {
             message = "There was an issue saving your data"
         case .FetchError:
             message = "There was an issue fetching your data. Check internet connection"
+        case .JSONError:
+            message = "Try a different stock, the format returned causes an error with JSONSerialization"
         }
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

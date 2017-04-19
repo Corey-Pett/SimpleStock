@@ -17,6 +17,7 @@ public enum ChartTimeRange {
 public enum StockDataError: Error {
     case FetchError
     case SaveError
+    case JSONError
 }
 
 fileprivate enum ChartKey: String {
@@ -60,7 +61,7 @@ final class StockData {
                         let resultJSON = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? [String : AnyObject],
                         let series = resultJSON?["series"] as? [ [String : AnyObject] ]
                     else {
-                        completion(false, nil, StockDataError.FetchError); return
+                        completion(false, nil, StockDataError.JSONError); return
                     }
                     
                     completion(true, series, nil)
