@@ -35,43 +35,40 @@ final class StockData {
     public func fetchStockChartFor(symbol: String,
                                    timeRange: ChartTimeRange,
                                    completion: @escaping (Bool, [[String: AnyObject]]?, StockDataError?) -> Void) {
-     
-        DispatchQueue.global(qos: .background).async {
+        
+        let url = self.chartUrlForRange(symbol: symbol, range: timeRange)
             
-            let url = self.chartUrlForRange(symbol: symbol, range: timeRange)
+        Alamofire.request(url, method: .get, parameters: ["":""], encoding: URLEncoding.default, headers: nil).responseData { (response:DataResponse<Data>) in
+            
+            switch(response.result) {
                 
-            Alamofire.request(url, method: .get, parameters: ["":""], encoding: URLEncoding.default, headers: nil).responseData { (response:DataResponse<Data>) in
+            case .success(_):
                 
-                switch(response.result) {
-                    
-                case .success(_):
-                    
-                    // Dissect the data result as AlamoFire does not allow JSON response for this call?
-                    guard let result = response.result.value else {
-                        completion(false, nil, StockDataError.FetchError); return
-                    }
-                    
-                    // Trim off some string fat
-                    var jsonString = NSString(data: result, encoding: String.Encoding.utf8.rawValue)!
-                    jsonString = jsonString.substring(from: 30) as NSString
-                    jsonString = jsonString.substring(to: jsonString.length-1) as NSString
-                    
-                    guard
-                        let data = jsonString.data(using: String.Encoding.utf8.rawValue),
-                        let resultJSON = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? [String : AnyObject],
-                        let series = resultJSON?["series"] as? [ [String : AnyObject] ]
-                    else {
-                        completion(false, nil, StockDataError.JSONError); return
-                    }
-                    
-                    completion(true, series, nil)
-                    
-                    break
-                    
-                case .failure(_):
-                    completion(false, nil, StockDataError.FetchError)
-                    break
+                // Dissect the data result as AlamoFire does not allow JSON response for this call?
+                guard let result = response.result.value else {
+                    completion(false, nil, StockDataError.FetchError); return
                 }
+                
+                // Trim off some string fat
+                var jsonString = NSString(data: result, encoding: String.Encoding.utf8.rawValue)!
+                jsonString = jsonString.substring(from: 30) as NSString
+                jsonString = jsonString.substring(to: jsonString.length-1) as NSString
+                
+                guard
+                    let data = jsonString.data(using: String.Encoding.utf8.rawValue),
+                    let resultJSON = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? [String : AnyObject],
+                    let series = resultJSON?["series"] as? [ [String : AnyObject] ]
+                else {
+                    completion(false, nil, StockDataError.JSONError); return
+                }
+                
+                completion(true, series, nil)
+                
+                break
+                
+            case .failure(_):
+                completion(false, nil, StockDataError.FetchError)
+                break
             }
         }
     }
