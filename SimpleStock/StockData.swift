@@ -10,21 +10,9 @@ import Foundation
 import Alamofire
 import CoreData
 
-public enum ChartTimeRange {
-    case OneDay, FiveDays, TenDays, OneMonth
-}
-
-public enum StockDataError: Error {
-    case FetchError
-    case SaveError
-    case JSONError
-}
-
-fileprivate enum ChartKey: String {
-    case volume, open, close, low, high
-}
-
 final class StockData {
+    
+    typealias fetchCompletion = (StockDataResult) -> Void
     
     /// Fetches chart information for a stock from the Yahoo API
     ///
@@ -34,7 +22,7 @@ final class StockData {
     ///   - completion: if success = true, data will be returned else return error
     public func fetchStockChartFor(symbol: String,
                                    timeRange: ChartTimeRange,
-                                   completion: @escaping (Bool, [[String: AnyObject]]?, StockDataError?) -> Void) {
+                                   completion: @escaping (fetchCompletion)) {
         
         let url = self.chartUrlForRange(symbol: symbol, range: timeRange)
             
@@ -46,7 +34,7 @@ final class StockData {
                 
                 // Dissect the data result as AlamoFire does not allow JSON response for this call?
                 guard let result = response.result.value else {
-                    completion(false, nil, StockDataError.FetchError); return
+                    completion(.Failure(.JSONError)); return
                 }
                 
                 // Trim off some string fat
@@ -59,15 +47,14 @@ final class StockData {
                     let resultJSON = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? [String : AnyObject],
                     let series = resultJSON?["series"] as? [ [String : AnyObject] ]
                 else {
-                    completion(false, nil, StockDataError.JSONError); return
+                    completion(.Failure(.JSONError)); return
                 }
                 
-                completion(true, series, nil)
-                
-                break
+                // Success
+                completion(.Success(series)); return
                 
             case .failure(_):
-                completion(false, nil, StockDataError.FetchError)
+                completion(.Failure(.FetchError));
                 break
             }
         }
@@ -75,6 +62,8 @@ final class StockData {
 }
 
 extension StockData {
+    
+    typealias completion = (StockDataResult) -> Void
     
     /// Takes an array of a stockPoint dictionary and sets a relationship between the stock and stockPoints
     ///
@@ -84,17 +73,17 @@ extension StockData {
     ///   - completion: if success = true, the stock will hold the data points else return error
     public func saveStockChartTo(stock: Stock,
                                  data: [[String: AnyObject]],
-                                 completion: @escaping (Bool, StockDataError?) -> Void) {
+                                 completion: @escaping (completion)) {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            completion(false, StockDataError.SaveError); return
+            completion(.Failure(.SaveError)); return
         }
         
         appDelegate.persistentContainer.performBackgroundTask ({ (managedContext) in
             
             // Allow saving for different contexts
             guard let stock = managedContext.object(with: stock.objectID) as? Stock else {
-                completion(false, StockDataError.SaveError); return
+                completion(.Failure(.SaveError)); return
             }
             
             // Remove old points
@@ -105,37 +94,17 @@ extension StockData {
             // Add new points
             for point in data {
                 
-                let date = NSDate(timeIntervalSince1970: (point["Timestamp"] as? Double ?? point["Date"] as! Double))
-                
-                let stockPoint = StockPoint(entity: StockPoint.entity(), insertInto: managedContext)
-                
-                guard
-                    let close = point[ChartKey.close.rawValue] as? Float,
-                    let open = point[ChartKey.open.rawValue] as? Float,
-                    let low =  point[ChartKey.low.rawValue] as? Float,
-                    let high = point[ChartKey.high.rawValue] as? Float,
-                    let volume = point[ChartKey.volume.rawValue] as? Float
-                else {
-                    return
-                }
-                
-                stockPoint.date = date
-                stockPoint.close = close
-                stockPoint.open = open
-                stockPoint.high = high
-                stockPoint.low = low
-                stockPoint.volume = volume
-                stockPoint.owner = stock
+                let _ = StockPoint.init(data: point, owner: stock, managedContext: managedContext)
                 
                 do {
                     try managedContext.save()
                 } catch let error as NSError {
                     print("Could not save. \(error), \(error.userInfo)")
-                    completion(false, StockDataError.SaveError)
+                    completion(.Failure(.SaveError)); return
                 }
             }
-        
-            completion(true, nil)
+            
+            completion(.Success(nil))
         })
     }
     
@@ -147,26 +116,45 @@ extension StockData {
     ///   - completion: if success = true, the stock will hold the data points else return error
     public func updateStockPoints(stock: Stock,
                                   timeRange: ChartTimeRange,
-                                  completion: @escaping (Bool, StockDataError?) -> Void) {
-
+                                  completion: @escaping (completion)) {
+        
+        // Need symbol to find stock
         guard let symbol = stock.symbol else {
-            completion(false, StockDataError.SaveError); return
+            completion(.Failure(.SaveError)); return
         }
         
-        self.fetchStockChartFor(symbol: symbol, timeRange: .OneMonth) { (success, data, error) in
-            if success {
+        // Fetch stock's chart information from symbol
+        self.fetchStockChartFor(symbol: symbol,
+                                timeRange: .OneMonth) { (result) in
+            
+            switch result {
+                
+            // If successfully fetch data
+            case .Success(let data):
                 
                 guard let data = data else {
-                    completion(false, StockDataError.SaveError); return
+                    completion(.Failure(.SaveError)); return
                 }
                 
-                self.saveStockChartTo(stock: stock, data: data, completion: { (success, error) in
-                    if success { completion(true, nil) }
-                    else { completion(false, StockDataError.SaveError) }
+                // Save newly fetched stock data
+                self.saveStockChartTo(stock: stock,
+                                      data: data,
+                                      completion: { (result) in
+                    
+                    switch result {
+                        
+                    case .Success(_):
+                        completion(.Success(nil)); break
+                    case .Failure(let error):
+                        completion(.Failure(error)); break
+                    }
                 })
                 
-            } else {
-                completion(false, error)
+                return
+
+            // Failed fetching data
+            case .Failure(let error):
+                completion(.Failure(error)); break
             }
         }
     }
@@ -201,5 +189,45 @@ fileprivate extension StockData {
         }
         
         return "http://chartapi.finance.yahoo.com/instrument/1.0/\(symbol)/chartdata;type=quote;range=\(timeString)/json"
+    }
+}
+
+// MARK: - Public enums
+
+public enum ChartTimeRange {
+    case OneDay, FiveDays, TenDays, OneMonth
+}
+
+public enum StockDataResult {
+    case Success([[String : AnyObject]]?)
+    case Failure(StockDataError)
+}
+
+public enum StockDataError: Error {
+    case FetchError
+    case SaveError
+    case JSONError
+    
+    var alert: UIAlertController! {
+        
+        let title = "Uh Oh! Error!"
+        var message = String()
+        
+        switch self {
+            
+        case .JSONError:
+            message = "Try a different stock, the format returned causes an error with JSONSerialization"
+            
+        default:
+            message = "Please reconnect to the internet. There isn't any saved data for your stock choice"
+        }
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OKAY", style: .default, handler: nil)
+        
+        alert.addAction(okAction)
+        
+        return alert
     }
 }

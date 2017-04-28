@@ -20,18 +20,24 @@ final class LaunchViewController: UIViewController {
         super.viewDidLoad()
 
         // Display loading screen
-        let progressView = ProgressView(view: self.view, message: "Migrating .csv files to CoreData. Please wait...")
+        let progressView = ProgressView(view: self.view)
+        progressView.message = "Migrating .csv files to CoreData. Please wait..."
         progressView.showView()
         
         // Setup the transition to CoreData
-        CSVHandler().setupApplication { (success, error) in
+        CSVHandler().setupApplication { (result) in
            
             progressView.hideView()
             
-            if success {
+            
+            switch result {
+                
+            case .Success(_):
                 self.present(Storyboard.search.viewController, animated: true, completion: nil)
-            } else {
-                self.present(error!.alert, animated: true, completion: nil)
+                
+            case .Failure(let error):
+                self.present(error.alert, animated: true, completion: nil)
+                
             }
         }
     }

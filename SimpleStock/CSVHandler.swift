@@ -13,13 +13,15 @@ import CoreData
 /// A handler to manage CSV files transition to CoreData
 final class CSVHandler {
     
+    typealias completion = (CVSResult) -> Void
+    
     /// Parses a CSV file and saves each entry as a Stock entity into CoreData on a background thread
     ///
     /// - Parameters:
     ///   - fileName: String name of file inside Bundle.main.path
     ///   - completion: success = true if CSV info is saved correclty, else return CSVHandlerError
     public func saveStockCSV(fileName: String,
-                                   completion: @escaping (_ success: Bool, _ error: CSVHandlerError?) -> Void) {
+                             completion: @escaping (completion)) {
         
         do {
             
@@ -28,40 +30,29 @@ final class CSVHandler {
             
             // Save to CoreData
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                throw CSVHandlerError.ErrorParsing
+                completion(.Failure(.ErrorParsing)); return
             }
             
             appDelegate.persistentContainer.performBackgroundTask({ (managedContext) in
                 while let _ = csv.next() {
                     
-                    let stock = Stock(entity: Stock.entity(), insertInto: managedContext)
-                    
-                    stock.symbol = csv[Header.symbol.rawValue]
-                    stock.name = csv[Header.name.rawValue]
-                    stock.lastSale = csv[Header.lastSale.rawValue]
-                    stock.marketCap = csv[Header.marketCap.rawValue]
-                    stock.ipoYear = csv[Header.ipoYear.rawValue]
-                    stock.sector = csv[Header.sector.rawValue]
-                    stock.industry = csv[Header.industry.rawValue]
-                    stock.summaryQuote = csv[Header.summaryQuote.rawValue]
+                    let _ = Stock(data: csv, managedContext: managedContext)
                     
                     do {
                         try managedContext.save()
                     } catch let error as NSError {
                         print("Could not save. \(error), \(error.userInfo)")
-                        completion(false, CSVHandlerError.ErrorSaving)
+                        completion(.Failure(.ErrorSaving)); return
                     }
                 }
                 
-                completion(true, nil)
+                completion(.Success(nil))
             })
             
         } catch CSVHandlerError.PathNotFound {
-            print("File not found")
-            completion(false, CSVHandlerError.PathNotFound)
+            print("Path not found"); completion(.Failure(.PathNotFound))
         } catch {
-            print("Error Parsing CSV")
-            completion(false, CSVHandlerError.ErrorParsing)
+            print("Error Parsing CSV"); completion(.Failure(.ErrorParsing))
         }
     }
     
@@ -100,12 +91,12 @@ extension CSVHandler {
     /// Could make this atomic, but I am too lazy
     ///
     /// - Parameter completion: success = true if all CSV info is saved correctly, else pass the error back
-    public func setupApplication(completion: @escaping (_ success: Bool, _ error: CSVHandlerError?) -> Void) {
+    public func setupApplication(completion: @escaping (completion)) {
         
         let dataKey = "isDataSaved"
         
         if UserDefaults.standard.bool(forKey: dataKey) {
-            completion(true, nil); return
+            completion(.Success(nil)); return
         }
         
         let files = ["AMEX", "NASDAQ", "NYSE"]
@@ -116,9 +107,13 @@ extension CSVHandler {
             
             dispatchGroup.enter()
             
-            self.saveStockCSV(fileName: file, completion: { (success, error) in
-                if error != nil {
-                    completion(false, error); return
+            self.saveStockCSV(fileName: file, completion: { (result) in
+                
+                switch result {
+                    
+                case .Success(_): break;
+                case .Failure(let error):
+                    completion(.Failure(error)); break
                 }
                 
                 dispatchGroup.leave()
@@ -127,20 +122,16 @@ extension CSVHandler {
         
         dispatchGroup.notify(queue: .main) {
             UserDefaults.standard.set(true, forKey: dataKey)
-            completion(true, nil)
+            completion(.Success(nil))
         }
     }
 }
 
-public enum Header: String {
-    case symbol = "Symbol"
-    case name = "Name"
-    case lastSale = "LastSale"
-    case marketCap = "MarketCap"
-    case ipoYear = "IPOyear"
-    case sector = "Sector"
-    case industry = "industry"
-    case summaryQuote = "Summary Quote"
+// MARK: - Public enums
+
+public enum CVSResult {
+    case Success(AnyObject?)
+    case Failure(CSVHandlerError)
 }
 
 public enum CSVHandlerError: Error {

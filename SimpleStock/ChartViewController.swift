@@ -64,7 +64,7 @@ final class ChartViewController: UIViewController {
     
     fileprivate func updateStockPoints() {
         
-        let progressView = ProgressView(view: self.view, message: nil)
+        let progressView = ProgressView(view: self.view)
         
         progressView.showView()
         
@@ -74,19 +74,23 @@ final class ChartViewController: UIViewController {
             return
         }
         
-        StockData().updateStockPoints(stock: stock, timeRange: .OneMonth) { (success, error) in
-            if !success {
-                if let error = error { self.handleError(error: error) }
-            } else {
-                self.stockPoints = stock.points?.allObjects as? [StockPoint]
-                
-                DispatchQueue.main.async {
-                    self.reloadCharts()
-                }
-            }
+        StockData().updateStockPoints(stock: stock, timeRange: .OneMonth) { (result) in
             
             DispatchQueue.main.async {
+                
                 progressView.hideView()
+                
+                switch result {
+                    
+                case .Success(_):
+                    
+                    self.stockPoints = stock.points?.allObjects as? [StockPoint]
+                    self.reloadCharts()
+                    break
+                    
+                case .Failure(let error):
+                    self.present(error.alert, animated: true, completion: nil)
+                }
             }
         }
     }
@@ -135,37 +139,6 @@ final class ChartViewController: UIViewController {
         self.candleStickChartView.xAxis.drawAxisLineEnabled = false
         self.candleStickChartView.rightAxis.drawLabelsEnabled = false
         self.candleStickChartView.data = candleChartData
-        
-    }
-    
-    fileprivate func handleError(error: StockDataError) {
-        
-        let title = "An error has occurred"
-        var message = String()
-        
-        switch error {
-            
-        case .SaveError:
-            message = "There was an issue saving your data"
-        case .FetchError:
-            message = "There was an issue fetching your data. Check internet connection"
-        case .JSONError:
-            message = "Try a different stock, the format returned causes an error with JSONSerialization"
-        }
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: "Use old data if exists", style: .default, handler: nil)
-        
-        // Bonus feature states automatic update
-//        let tryAgainAction = UIAlertAction(title: "Try Again", style: .default) { (action) in
-//            self.updateStockPoints()
-//        }
-        
-//        alert.addAction(tryAgainAction)
-        alert.addAction(okAction)
-        
-        self.present(alert, animated: true, completion: nil)
         
     }
 }

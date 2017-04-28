@@ -59,18 +59,18 @@ final class SearchViewController: UIViewController, UISearchControllerDelegate {
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
         let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { (asynchronousFetchResult) -> Void in
-        
-            DispatchQueue.main.async(execute: { () -> Void in
-                if let stocks = asynchronousFetchResult.finalResult {
-                    if filterText != nil {
-                        self.filteredStocks = stocks
-                    } else {
-                        self.stocks = stocks
-                    }
-                    
+            
+            if let stocks = asynchronousFetchResult.finalResult {
+                if filterText != nil {
+                    self.filteredStocks = stocks
+                } else {
+                    self.stocks = stocks
+                }
+                
+                DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-            })
+            }
         }
 
         do {
